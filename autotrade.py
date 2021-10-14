@@ -42,7 +42,7 @@ fig.add_trace(go.Scatter(x=btc_data.index,
                 y=btc_data['macd'], name = 'macd'),
                 row=2,col=1)
 fig.add_trace(go.Scatter(x=btc_data.index,
-                y=btc_data['signal'], name = 'macd'),
+                y=btc_data['signal'], name = 'signal'),
                 row=2,col=1)
 fig.add_trace(go.Bar(x=btc_data.index,
                 y=btc_data['hist'], name = 'histogram', marker_color = btc_data['Color']),
