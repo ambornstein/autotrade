@@ -26,7 +26,6 @@ def get_data(short, range, tick):
     data_macd = get_macd(data['Close'], 26, 12, 9)
     data_macd['Color'] = np.where(data_macd['hist']<0, 'red', 'green')
     data_macd.tail()
-    data.merge(data_macd, on='Date', how='inner')
     return data
 
 btc_data = get_data("1d", "3mo", "BTC-USD")
