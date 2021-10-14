@@ -26,7 +26,7 @@ def get_data(short, range, tick):
     data_macd = get_macd(data['Close'], 26, 12, 9)
     data_macd['Color'] = np.where(data_macd['hist']<0, 'red', 'green')
     data_macd.tail()
-    return data
+    return pd.concat([data,data_macd], axis=1)
 
 btc_data = get_data("1d", "3mo", "BTC-USD")
 print(btc_data)
@@ -68,7 +68,6 @@ fig.update_xaxes(
         ])
     )
 )
-fig.layout = layout
 
 #Show
 
