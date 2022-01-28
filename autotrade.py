@@ -28,15 +28,12 @@ def get_data(short, range, tick):
     data_macd.tail()
     return pd.concat([data,data_macd], axis=1)
 
-btc_data = get_data("1d", "3mo", "BTC-USD")
+btc_data = get_data("1h", "1d", "BTC-USD")
 print(btc_data)
 #print(data)
 fig = make_subplots(vertical_spacing = 0, shared_xaxes=True, rows=2, cols=1, row_heights=[0.6, 0.4])
-fig.add_trace(go.Candlestick(x=btc_data.index,
-                open=btc_data['Open'],
-                high=btc_data['High'],
-                low=btc_data['Low'],
-                close=btc_data['Close'], name = 'candle'),
+fig.add_trace(go.Scatter(x=btc_data.index,
+                y=btc_data['Close'], name = 'trend'),
                 row=1,col=1)
 fig.add_trace(go.Scatter(x=btc_data.index,
                 y=btc_data['macd'], name = 'macd'),
@@ -56,20 +53,8 @@ fig.update_layout(
     xaxis2=dict(showticklabels=True))
 
 # X-Axes
-fig.update_xaxes(
-    showline=True, linewidth=1, linecolor='black', mirror=True,
-    rangeselector=dict(
-        buttons=list([
-            dict(count=15, label="15m", step="minute", stepmode="backward"),
-            dict(count=45, label="45m", step="minute", stepmode="backward"),
-            dict(count=1, label="HTD", step="hour", stepmode="todate"),
-            dict(count=3, label="3h", step="hour", stepmode="backward"),
-            dict(step="all")
-        ])
-    )
-)
+fig.update_xaxes(showline=True, linewidth=1, linecolor='black', mirror=True)
 
 #Show
-
 fig.show()
 #k=input("press close to exit") 
